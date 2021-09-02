@@ -1,0 +1,34 @@
+body {
+    background-color: #d1d6da
+}
+
+.card {
+    background-color: #00544f;
+    width: 400px
+}
+
+.form-control {
+    background-color: #00544f;
+    border: none;
+    border-bottom: 1px solid #eee;
+    border-radius: 1px;
+    padding: 2px;
+    padding-bottom: 8px
+}
+
+.form-control:focus {
+    background-color: #00544f;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #eee;
+    color: #fff
+}
+
+.btn-secondary {
+    height: 50px;
+    border-radius: 30px
+}
+
+.terms {
+    font-size: 13px
+}

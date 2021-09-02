@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="icon"  type="image/png" href="https://i1.wp.com/crystaljag.com/write-on/wp-content/uploads/2016/01/cropped-favicon512x512-1.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>{% block title %}The Wall{% endblock %}</title>
+    </style>
+    {% block estilos %}
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    {% endblock %}
+    </head>
+    <body>
+        <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
+            <form method="POST" action="/login" class="row g-3 mx-3">
+                {% csrf_token %}
+                <div class="card p-3 text-center py-4">
+                    <div> <img src="https://i.imgur.com/dkWaSol.png" width="70"> </div>
+                    <div class="px-sm-4 mt-3 px-3">
+                        <input class="form-control mt-3" type="email" name="email" placeholder="Email address"> 
+                        <input class="form-control mt-3" type="password" name="password" placeholder="Password"> 
+                    </div>
+                    <div class="px-5 mt-4"> <button class="btn btn-secondary w-100 text-uppercase">Signup</button> </div>
+                    <div class="px-5"> <span class="terms">By creating an account, you agree and accept our <a href="#" class="text-decoration-none">terms</a> and <a href="#" class="text-decoration-none">conditions</a>.</span> </div>
+                    <div> <span>Already don´t have an account?</span> <a href="/register" class="text-decoration-none">Signup</a> </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

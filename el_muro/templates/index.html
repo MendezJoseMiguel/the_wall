@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="icon"  type="image/png" href="https://i1.wp.com/crystaljag.com/write-on/wp-content/uploads/2016/01/cropped-favicon512x512-1.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>{% block title %}The Wall{% endblock %}</title>
+        <style>
+            .user {
+                display: inline-block;
+                margin-right: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                background-color: rgb(109, 230, 230);
+                font-weight: bold;
+            }
+        </style>
+        {% block estilos %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% endblock %}
+    </head>
+    <body style="background-image: url(https://i.pinimg.com/originals/2d/b3/77/2db377fa6ca1d00a8f4ce5cfd5fdf285.jpg); background-size:100%; background-repeat:no-repeat">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/wall">Wall</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/wall/new_user">New User</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                    <a class="nav-link span user" href="#">Hola {{request.session.user.first_name}}!</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link " href="/login">Login</a>
+                    </li> -->
+                    <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                    </li> -->
+                    <li class="nav-item">
+                    <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Salir</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                </div>
+            </div>
+            </nav>
+
+        <h1 class="fs-1 m-5 text-center text-light">{% block h1 %}The Wall{% endblock %}</h1>
+        {% block content %}
+        
+        <div class="container">
+            <div class="row text-center justify-content-center my-5">
+                <form method="POST" action="/create_messages" class="row g-3 mx-3">
+                    {% csrf_token %}
+                    <div class="col-2 form-outline  my-2 mx-4" style="opacity:0.8">
+                        <label class="form-label"  for="form3Example1cg" style="color:white">Post a Messages</label>
+                        <textarea type="text"  id="message" style="width: 800px; height: 100px;" name="post" class="form-control form-control-lg"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="shadow btn btn-success">Post a message</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-2 my-5 mx-5" style="opacity:0.8">
+                    <h3>Messages</h3>
+                    {% for post in post %}
+                        <p>{{post.user}}</p>
+                        <p>{{post.post}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <script>
+        // Acá se muestran los Toastr's
+            {% if messages %}
+                {% for message in messages %}
+                toastr.{{message.tags }}("{{ message }}")
+                {% endfor %}
+            {% endif %}  
+        </script>
+    </body>
+</html>
